@@ -1,0 +1,45 @@
+# 6 Roadmap
+
+**Stage 1: Prototype of Sidechain on Paseo with simple front-end support** ✅\
+At this stage, we created a functional sidechain running on Paseo which supported a narrow use case to run a public user testing campaign with a specific action flow. A simple web campaign page as UI supported the actions performed by end users. On Paseo, we can already demonstrate the ability to do transfers on L2 fully private.
+
+**Stage 2: Fully functional Sidechain deployed on Paseo with a nice UI** ✅\
+At this stage, we were able to demonstrate a fully functional sidechain running on Paseo with a nice UI to perform all the actions necessary to do transfers and check account balances with authentication.
+
+**Stage 3: Test Emergency Interventions on Paseo** ✅\
+We ran different emergency scenarios on Paseo to show that recovery is possible and working as designed. Among the scenarios, we put the shard into maintenance mode (temporarily pausing state transitions) and shard retirement (force-unshielding all balances back to L1).
+
+**Stage 4: Battle-Test the Basics on Integritee Network** ⏳\
+The first productive incarnation is a functional privacy-preserving sidechain for transactions of TEER tokens only. Moreover, at this stage, we will only allow shielding of limited amounts. This is a precaution in the beta phase against both potential loss and legal issues. Limits are set high enough to endow accounts and be active, but low enough to hinder money laundering.
+
+**Stage 5: Beta Release on Kusama, Polkadot & Assethub** 🏳️\
+After successful operations on the Integritee Network, we will deploy Incognitee on Kusama and Polkadot. This will enable not only the support for KSM and DOT but also for other Parachain tokens on Assethub.
+
+**Stage 6: Sidechain Governance, Nomination, and External Validateers** 🏳\
+️We will soon introduce a Sidechain Governance mechanism that will allow a decentralized governance of several Incognitee sidechains independently from Integritee Network. Additionally, we will open up the permissionless operation of TEE-based Validateers for Incognitee sidechains with nominations from token holders. This will allow the distribution of Incognitee fees collected from operations in a decentralized way.
+
+**Stage 7: Security Audit** 🏳️\
+Our implementation will be audited by a specialized and independent team before lowering the limitations of the beta version.
+
+## Future Stages 🏳️ <a href="#bd06" id="bd06"></a>
+
+**Remove Limitations and add new features**\
+Finally, we will remove certain limitations and add other features like private voting on Polkadot and Kusama and private token swaps.
+
+**API Integration**\
+At this point, our sidechain API will be compatible with js/api json-rpc, and integrate well with established wallets. This may involve upstreaming our authentication procedure for queries, so we will be looking for collaborations with wallet teams to make private transactions as smooth as can be.
+
+**Release for other ecosystems**\
+We are planning to expand to other ecosystems and offer the Incognitee solution to a broader user base.
+
+**Enabling Law Enforcement Access**\
+We shall allow law enforcement to request selective disclosure of certain data concerning certain accounts. A governance process needs to be specified to ensure due auditing.
+
+
+
+
+
+
+
+\
+\
