@@ -30,8 +30,8 @@ Privacy matters, but we won’t get it. neither from credit cards nor from crypt
 
 #### Resources <a href="#resources" id="resources"></a>
 
-* ​ [Community](5-resources/community.md) - List of community rooms and channels to talk to others about Incognitee and Integritee.
+* ​ [Community](6.-resources/community.md) - List of community rooms and channels to talk to others about Incognitee and Integritee.
 
 #### Roadmap <a href="#roadmap" id="roadmap"></a>
 
-* ​ [Roadmap](6-roadmap.md) - See what we are planning for Incognitee
+* ​ [Roadmap](7.-roadmap.md) - See what we are planning for Incognitee
