@@ -28,6 +28,10 @@ Privacy matters, but we won’t get it. neither from credit cards nor from crypt
 * ​ [Become a Bug Hunter](4.-want-to-join-or-support-incognitee/4.4-become-a-bug-hunter.md) - Information how to hunt for Incognitee bugs.
 * &#x20;[Get TEERdays ](4.-want-to-join-or-support-incognitee/4.5-get-teerdays.md)-  Information about what TEERdays are and how to earn them.
 
+#### Technology <a href="#resources" id="resources"></a>
+
+* ​ [Technology](5.-technology/) - Information about the underlying tech, the concepts and architecture.&#x20;
+
 #### Resources <a href="#resources" id="resources"></a>
 
 * ​ [Community](6.-resources/community.md) - List of community rooms and channels to talk to others about Incognitee and Integritee.
