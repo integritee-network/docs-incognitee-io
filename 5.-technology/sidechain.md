@@ -2,11 +2,11 @@
 
 Incognitee is a shardable sidechain validated by trusted execution environments. Each shard is a separate L2 connecting to exactly one L1 chain and its native token.
 
-The follwoing diagram shows examples of Incognitee shards:
+The following diagram shows the Incognitee shards which are currently live:
 
-<figure><img src="../.gitbook/assets/incognitee-shard-overview.drawio.svg" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/incognitee-shard-overview.drawio (1).svg" alt=""><figcaption></figcaption></figure>
 
-As indicated on Testnet Paseo, multiple shards can be deployed on the same L1, enabling horizontal scalability.
+Multiple shards could be deployed on the same L1, enabling horizontal scalability.
 
 The Integritee Network is necessary to get finality for sidechain blocks and to verify remote attestation of validateer TEEs.
 

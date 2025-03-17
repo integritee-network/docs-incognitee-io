@@ -30,7 +30,7 @@ Privacy matters, but we won’t get it. neither from credit cards nor from crypt
 
 #### Technology <a href="#resources" id="resources"></a>
 
-* ​ [Technology](5.-technology/) - Information about the underlying tech, the concepts and architecture.&#x20;
+* ​ [Technology](broken-reference) - Information about the underlying tech, the concepts and architecture.&#x20;
 
 #### Resources <a href="#resources" id="resources"></a>
 

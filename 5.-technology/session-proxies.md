@@ -2,11 +2,9 @@
 
 Session proxies enable smooth UX even when Incognitee requires authentication for querying balances and messages.
 
-For good security, we encourage users to protect their private keys in signer extensions for browsers or mobile wallets. 
-These, however, come with a lot of user interaction if many actions require individual digital signatures.
+For good security, we encourage users to protect their private keys in signer extensions for browsers or mobile wallets. These, however, come with a lot of user interaction if many actions require individual digital signatures.
 
-Incognitee not only authenticates users when they want to perform state transitions (transactions, sending tokens or messages) 
-but also when they query their balance or check incoming messages. This is necessary for privacy reasons.
+Incognitee not only authenticates users when they want to perform state transitions (transactions, sending tokens or messages) but also when they query their balance or check incoming messages. This is necessary for privacy reasons.
 
 To make the user experience smoother, we introduce the concept of session proxies.
 
@@ -26,7 +24,3 @@ As session proxies are stored on encrypted sidechain state, you can use them acr
 ## Why do I need to pay a deposit?
 
 Your session proxy is stored on the Incognitee shard. Onchain storage is costly and we need to prevent state-bloat. Therefore, we ask for a tiny deposit for each session proxy you register (currently limited to one per owner account). Once you unregister the session proxy, the deposit is returned.
-
-
-
-
