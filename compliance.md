@@ -12,6 +12,8 @@ The key requirement for compliance is enabling law enforcement to access specifi
 
 Since blockchains do not inherently fit within national jurisdiction models, we must design a solution from first principles.
 
+***Disclaimer**: This document does not constitute legal advice. The compliance measures outlined here are based on our current understanding and may not ultimately meet all regulatory requirements. Individuals and businesses must conduct their own research to determine whether they can legally use Incognitee in their respective jurisdictions.*
+
 ## Incognitee Compliance Requirements
 
 To establish compliance, we first outline the key stakeholders and their requirements:
