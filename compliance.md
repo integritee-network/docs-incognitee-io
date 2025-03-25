@@ -4,89 +4,109 @@ description: Balancing Privacy and Compliance
 
 # Compliance
 
-Incognitee aims for privacy-by-default but also compliance at the same time. Balancing the two is mostly terra incognita in web3. The common opinion seems to be very polarized and other projects either refuse to help fight money laundering and other criminal activity entirely or - on the other end of the spectrum - deliver a plain backdoor to authorities. Integritee refuses to do either.
+Incognitee is committed to privacy-by-default while ensuring compliance with regulatory requirements. Striking this balance remains largely uncharted territory in Web3. Opinions on this matter are highly polarized: some projects refuse to engage in anti-money laundering (AML) efforts entirely, while others introduce explicit backdoors for authorities. Integritee rejects both extremes.
 
-We see the main requirement for compliance to be the possibility for law enforcement agencies to gain insight into specific data subject to reasonable and legitimate suspicion of serious crime. Today, this may be a necessary - but not sufficient requirement to be considered compliant with many jurisdictions. But let’s look at the heart of the matter and think about a design from scratch:
+The key requirement for compliance is enabling law enforcement to access specific data when there is a reasonable and legitimate suspicion of serious crime. While this is necessary for compliance in many jurisdictions, it is not always sufficient. Instead of conforming to traditional national models, we propose a novel approach and argue why nation-states should accept it:
 
-**Law enforcement shall be enabled in any reasonable society - but wide-ranging surveillance shall not.**
+**Law enforcement must have necessary tools in a functioning society, but mass surveillance must be avoided.**
 
-Blockchains don’t fit into any national jurisdiction model, so we should come up with something ourselves and argue, why nation-states should accept it.
-
-This is what we’ll attempt to do in the following.
+Since blockchains do not inherently fit within national jurisdiction models, we must design a solution from first principles.
 
 ## Incognitee Compliance Requirements
 
-Let’s first describe the main stakeholders and their requirements.
+To establish compliance, we first outline the key stakeholders and their requirements:
 
 ### Individuals
-* desire privacy by default
-* reject mass surveillance both by state actors or private companies
-* desire the freedom to use Incognitee for legitimate reasons without risking legal jeopardy
-* right to be forgotten: maximum retention time of sensitive data to be enforced
+- Expect privacy by default
+- Oppose mass surveillance by both state and private actors
+- Want the freedom to use Incognitee for legitimate purposes without legal risks
+- Require a maximum retention period for sensitive data ("right to be forgotten")
 
 ### Validateer Operators
-
-* desire the freedom to operate nodes without risking legal jeopardy
+- Seek the ability to operate nodes for profit without legal risk
 
 ### Law Enforcement Detectives
-
-To prosecute crime, detectives may need insights of the following kind in the context of Incognitee:
-
-* given an input (shielding) event, where did the money go?
+To investigate crimes, law enforcement may need:
+- The ability to trace funds from an input (shielding) event to their destination
 
 ### AML Compliance Departments
-
-Banks and exchanges are obliged to perform due diligence on the origin of assets they receive. In the context of Incognitee, they might need proof of the beneficial owner to know:
-
-* given an output (unshielding) event, where did the money originate from?
+Banks and exchanges must verify asset origins. They may require proof of beneficial ownership to determine:
+- The source of funds for an output (unshielding) event
 
 ### National Governments
-
-May enforce sanctions on other nations, their citizens or selected individuals.
-
-* prevent actors from specified jurisdiction to
-   * use the service
-   * send tokens to actors residing in sanctioned jurisdictions
+Governments may enforce sanctions on nations, individuals, or entities:
+- Preventing specific jurisdictions from:
+    - Using the service
+    - Sending tokens to sanctioned entities
 
 ### Secondary Requirements
+- **Preventing account poisoning:** Attackers must not be able to taint accounts by sending illicit funds
+- **Selective disclosure:** Voluntary disclosure by one account holder must not compromise others; read keys must only reveal information about the disclosing subject
 
-* preventing account poisoning: an attacker should be unable to poison other accounts by simply sending black money to them
-* voluntary disclosure by one account holder should not expose others: read keys should only disclose information about the disclosing subject
+## Assumptions
+To transition from an abstract framework to a practical implementation, we assume:
+- Each Incognitee shard operates under a single jurisdiction (e.g., Switzerland)
+- All validateers (nodes) within a shard are physically located in the jurisdiction
+- A designated court represents the jurisdiction on-chain, acting via a multisig account or DAO
 
-## Assumptions 
-
-The following simplifications will be assumed to get from the very abstract to the practically feasible.
-
-* Each Incognitee shard has a single associated jurisdiction, e.g. Switzerland
-* all validateers (nodes) for that shard are operated within the geographical bounds of that jurisdiction
-* jurisdiction names a court to be represented on-chain e.g. as a multisig account or some form of DAO.
-
-Different jurisdictions may have different compliance requirements.
+Different jurisdictions may impose distinct compliance requirements.
 
 ## Suggested Solutions
 
 ### Beta Stage: Limiting Shielding Amounts
+A simple but effective AML measure is capping the value of shielded transactions. Until more sophisticated compliance mechanisms are in place, this will serve as an initial deterrent.
 
-One simple yet effective countermeasure to money laundering is to only allow relatively small amounts of value to be shielded. Before Incognitee has other measures in place, this is what we’ll do.
+- Small transaction limits discourage money launderers and sanctioned entities
+- Even with sybil attacks, large amounts cannot achieve meaningful k-anonymity
 
-Small amounts are unattractive for both money launderers and sanctioned people and entities. Even if they find a way to sybil-attack and bypass the shielding limits, the k-anonymity they can obtain is very limited for large amounts.
-
-### Beta Stage: KYB
-
-To make Incognitee useful for businesses requiring larger shielding limits, Integritee as the operator of Incognitee during beta stage can offer whitelisting subject to KYB.
+### Beta Stage: KYB (Know Your Business)
+To accommodate businesses requiring higher shielding limits, Integritee, as the operator of Incognitee in its beta stage, can provide whitelisting subject to KYB verification.
 
 ### Enforced Selective Disclosure and Freezing
 
-Validateers send each financial transfer event to an immutable log (i.e. EventStore) as ciphertext, encrypted with a per-account symmetric log-key. The log-keys are only stored in Incognitee’s encrypted state and can only be read by the account holder. However, the court is authorized to disclose an account’s log-key to law enforcement of its jurisdiction, enabling its agents to read the account’s transaction history.
+#### Immutable Event Log with Per-Account Encryption
 
-**Voluntary disclosure** (a.k.a. proof-of-innocence) is possible through read-keys (using the session-proxies feature): Let’s assume an individual wants to convince some banks' AML compliance department that their deposit originates from an account they control which in the past shielded funds to Incognitee - or, less invasive: proof that the funds don’t originate from an account which has been blacklisted a-posteriori. The disclosing individual would create read-keys for the AML department to follow the money back to the shielding event using the log-keys. Because such a trace leaks more information than necessary, the individual could generate a ZK proof over selected log entries which only prove the connection between input and output and hide detailed behavioral information.
+- Validateers log each financial transaction as encrypted ciphertext in a public and tamper-resistant event log (e.g. [EventStore](https://www.eventstore.com/))
+- Each account has a unique symmetric log key stored securely within Incognitee
+- Only account holders can decrypt their transaction history
+- Courts, authorized by their jurisdiction and authorized on an Incognitee shard, may grant law enforcement access to an account’s log key when legally justified
 
-**Sanctions** could be addressed in multiple ways: validateer operators can **blacklist** L1 addresses and block attempts to shield funds. But that will only work before the sanctioned entity has shielded funds. Another measure would be to authorize the court to freeze accounts on Incognitee.
+#### Voluntary Disclosure (Proof-of-Innocence)
 
-With such far-reaching authorization, the court could potentially render Incognitee useless because it may freeze all its accounts or disclose information on all accounts. In fact, the court might effectively become a backdoor, which we strictly aim to avoid. Therefore, we suggest **rate limiting** and transparency of court actions. Pure cryptography can’t do that, but a network of trusted execution environments such as Incognitee can. Incognitee can restrict court interventions to N per day. Moreover, a transparent log of court interventions can be published by the validateer operators.
+Users can provide proof-of-origin to AML compliance departments without revealing unnecessary details:
+- By generating read-keys, users can trace funds back to shielding events
+- Zero-knowledge proofs (ZKPs) ensure only relevant transaction links are disclosed, preserving privacy of behavioral details which are not relevant for AML
 
-The diagram below shows what the event log could look like. For financial transactions from one account to another, we’ll introduce a quarantine account. The receiver will need to actively accept incoming transfers. This prevents account poisoning but also ensures that voluntary disclosure by one side doesn’t reveal information about the other side. Each account will store a symmetric encryption key on Incognitee state. Every transaction will then be logged in encrypted form and only the account holder can decrypt log entries affecting them (except for the court as described above). After the retention period required for the given jurisdiction, log entries should be purged. For this purging of logs to be meaningful, log-keys should be rotated in fixed intervals (deleting the encryption key is considered equivalent to deletion of the encrypted content).
+#### Handling Sanctions
+
+Sanctions can be enforced through:
+- **Blacklist mechanisms:** Validateers can block attempts to shield funds from sanctioned addresses
+- **Account freezing:** Courts may be authorized to freeze Incognitee accounts
+
+#### Mitigating Backdoor Risks
+
+To prevent courts from abusing their authority (e.g., mass freezes or universal disclosure):
+- Court actions are **rate-limited** (e.g., limited interventions per day)
+- Court interventions are logged transparently and published by validateers
+
+## Secure Event Logging and Data Retention
+
+To prevent account poisoning and excessive data exposure:
+- A **quarantine mechanism** ensures receivers actively accept incoming transactions
+- Logs are encrypted per account and only accessible to the respective owner (unless legally disclosed by the court)
+- Log retention is jurisdiction-dependent, after which:
+    - Log-keys are rotated at fixed intervals
+    - Deleting an encryption key equates to deleting the log content
 
 <figure><img src=".gitbook/assets/ELIAS-eventlog.drawio.svg" alt=""><figcaption><p>Event Log with per-account encryption, enabling selective disclosure of transaction history</p></figcaption></figure>
 
-The symmetric encryption algorithm for the log shall be chosen to be quantum-safe, yet ZK-friendly to allow lightweight proof-of-innocence. From what we know today, possible candidates could be: [Poseidon](https://www.poseidon-hash.info/), [Rescue Prime](https://eprint.iacr.org/2020/1143), [MiMC](https://eprint.iacr.org/2016/492)
+## Cryptographic Considerations
+To ensure security and efficiency:
+- The symmetric encryption algorithm must be **quantum-safe** and **ZK-friendly**
+- Potential candidates include:
+    - [Poseidon](https://www.poseidon-hash.info/)
+    - [Rescue Prime](https://eprint.iacr.org/2020/1143)
+    - [MiMC](https://eprint.iacr.org/2016/492)
+
+This approach balances privacy and compliance while maintaining decentralization and user control. By leveraging cryptographic techniques and trusted execution environments, Incognitee ensures lawful oversight without enabling mass surveillance.
+
