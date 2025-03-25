@@ -23,6 +23,7 @@
   * [Session Proxies](5.-technology/session-proxies.md)
   * [Private Swaps](5.-technology/private-swaps.md)
   * [Private Voting](5.-technology/private-voting.md)
+* [Compliance](compliance.md)
 * [Resources](6.-resources/README.md)
   * [Community](6.-resources/community.md)
 * [Roadmap](7.-roadmap.md)
